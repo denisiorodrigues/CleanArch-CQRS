@@ -10,4 +10,15 @@
     <ProjectReference Include="..\ClenaArch.Domain\ClenaArch.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Members\Queries\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="Abstractions\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+
 </Project>

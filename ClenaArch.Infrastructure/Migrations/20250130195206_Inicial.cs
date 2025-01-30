@@ -7,7 +7,7 @@
 namespace ClenaArch.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class inicial : Migration
+    public partial class Inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,7 @@ namespace ClenaArch.Infrastructure.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     FirstName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     LastName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    Gander = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
+                    Gender = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
                     Email = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
                     IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
@@ -31,7 +31,7 @@ namespace ClenaArch.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "members",
-                columns: new[] { "Id", "Email", "FirstName", "Gander", "IsActive", "LastName" },
+                columns: new[] { "Id", "Email", "FirstName", "Gender", "IsActive", "LastName" },
                 values: new object[,]
                 {
                     { 1, "janis@email.com", "Jane", "feminino", true, "Doe" },

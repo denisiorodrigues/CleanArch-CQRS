@@ -20,6 +20,10 @@ public static class DependencyInjection
         services.AddScoped<IMemberRepository, MemberRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+        var myHandlers = AppDomain.CurrentDomain.Load("ClenaArch.Application");
+        services.AddMediatR(config => config.RegisterServicesFromAssemblies(myHandlers));
+
+
         return services;
     }
 }

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClenaArch.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250130170622_inicial")]
-    partial class inicial
+    [Migration("20250130195206_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,7 +36,7 @@ namespace ClenaArch.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Gander")
+                    b.Property<string>("Gender")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("TEXT");
@@ -60,7 +60,7 @@ namespace ClenaArch.Infrastructure.Migrations
                             Id = 1,
                             Email = "janis@email.com",
                             FirstName = "Jane",
-                            Gander = "feminino",
+                            Gender = "feminino",
                             IsActive = true,
                             LastName = "Doe"
                         },
@@ -69,7 +69,7 @@ namespace ClenaArch.Infrastructure.Migrations
                             Id = 2,
                             Email = "jhon@email.com",
                             FirstName = "Jhon",
-                            Gander = "masculino",
+                            Gender = "masculino",
                             IsActive = true,
                             LastName = "Doe"
                         });
