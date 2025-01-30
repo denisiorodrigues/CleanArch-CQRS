@@ -1,4 +1,5 @@
 ﻿using ClenaArch.Domain.Validation;
+using System.Text.Json.Serialization;
 
 namespace ClenaArch.Domain.Entities;
 
@@ -21,6 +22,12 @@ public sealed class Member : Entity
         IsActive = isActive;
     }
 
+    public Member()
+    {
+        
+    }
+
+    [JsonConstructor]
     public Member(int id, string? firstName, string? lastName, string? gander, string? email, bool isActive)
     {
         DomainValidation.When(id < 0, "Invalid Id, must be greater than 0");
