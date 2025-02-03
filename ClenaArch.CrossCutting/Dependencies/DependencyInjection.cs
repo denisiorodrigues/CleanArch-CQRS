@@ -1,11 +1,13 @@
 ﻿using ClenaArch.Domain.Abstraction;
 using ClenaArch.Infrastructure.Context;
 using ClenaArch.Infrastructure.Repositories;
+using FluentValidation;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Data;
+using System.Reflection;
 
 namespace ClenaArch.CrossCutting.Dependencies;
 
@@ -33,6 +35,7 @@ public static class DependencyInjection
         var myHandlers = AppDomain.CurrentDomain.Load("ClenaArch.Application");
         services.AddMediatR(config => config.RegisterServicesFromAssemblies(myHandlers));
 
+        services.AddValidatorsFromAssembly(Assembly.Load("ClenaArch.Application"));
 
         return services;
     }
