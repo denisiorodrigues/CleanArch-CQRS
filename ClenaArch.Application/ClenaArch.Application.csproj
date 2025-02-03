@@ -11,9 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Members\Queries\" />
     <Folder Include="DTOs\" />
-    <Folder Include="Abstractions\" />
     <Folder Include="Services\" />
   </ItemGroup>
 

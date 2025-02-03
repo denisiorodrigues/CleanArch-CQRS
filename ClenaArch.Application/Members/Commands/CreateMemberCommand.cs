@@ -1,13 +1,7 @@
-﻿using ClenaArch.Domain.Entities;
-using MediatR;
+﻿using ClenaArch.Application.Abstractions;
 
 namespace ClenaArch.Application.Members.Commands;
 
-public  class CreateMemberCommand : IRequest<Member>
+public  class CreateMemberCommand : MemberCommandBase
 {
-    public string? FirstName { get; set; }
-    public string? LastName { get; set; }
-    public string? Gender { get; set; }
-    public string? Email { get; set; }
-    public bool? IsActive { get; set; }
 }

@@ -1,9 +1,11 @@
 ﻿using ClenaArch.Domain.Abstraction;
 using ClenaArch.Infrastructure.Context;
 using ClenaArch.Infrastructure.Repositories;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Data;
 
 namespace ClenaArch.CrossCutting.Dependencies;
 
@@ -16,9 +18,17 @@ public static class DependencyInjection
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlite(myConnectinString,
                 b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
-        
+
+        services.AddSingleton<IDbConnection>(provider =>
+        {
+            var connection = new SqliteConnection(myConnectinString);
+            connection.Open();
+            return connection;
+        });
+
         services.AddScoped<IMemberRepository, MemberRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IMemberDapperRepository, MemberDapperRepository>();
 
         var myHandlers = AppDomain.CurrentDomain.Load("ClenaArch.Application");
         services.AddMediatR(config => config.RegisterServicesFromAssemblies(myHandlers));

@@ -1,4 +1,5 @@
 ﻿using ClenaArch.Application.Members.Commands;
+using ClenaArch.Application.Members.Queries;
 using ClenaArch.Domain.Abstraction;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -9,19 +10,18 @@ namespace ClenaArch.Api.Controllers;
 [ApiController]
 public class MembersController : ControllerBase
 {
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IMediator _mediator;
 
     public MembersController(IUnitOfWork unitOfWork, IMediator mediator)
     {
-        _unitOfWork = unitOfWork;
         _mediator = mediator;
     }
 
     [HttpGet] //Queries
     public async Task<IActionResult> GetMembers()
     {
-        var members = await _unitOfWork.MemberRepository.GetAllMembersAsync();
+        var query = new GetMembersQuery();
+        var members = await _mediator.Send(query);
 
         return members != null ? Ok(members) : NotFound();
     }
@@ -29,7 +29,9 @@ public class MembersController : ControllerBase
     [HttpGet("{id}")] //Queries
     public async Task<IActionResult> GetMembers(int id)
     {
-        var member = await _unitOfWork.MemberRepository.GetMemberByIdAsync(id);
+        var query = new GetMemberByIdQuery() { Id = id };
+
+        var member = await _mediator.Send(query);
 
         return member != null ? Ok(member) : NotFound("Member not found");
     }
