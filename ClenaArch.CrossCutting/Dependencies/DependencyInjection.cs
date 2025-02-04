@@ -1,4 +1,5 @@
-﻿using ClenaArch.Domain.Abstraction;
+﻿using ClenaArch.Application.Members.Commands.Validations;
+using ClenaArch.Domain.Abstraction;
 using ClenaArch.Infrastructure.Context;
 using ClenaArch.Infrastructure.Repositories;
 using FluentValidation;
@@ -33,7 +34,11 @@ public static class DependencyInjection
         services.AddScoped<IMemberDapperRepository, MemberDapperRepository>();
 
         var myHandlers = AppDomain.CurrentDomain.Load("ClenaArch.Application");
-        services.AddMediatR(config => config.RegisterServicesFromAssemblies(myHandlers));
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssemblies(myHandlers);
+            config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
+        });
 
         services.AddValidatorsFromAssembly(Assembly.Load("ClenaArch.Application"));
 

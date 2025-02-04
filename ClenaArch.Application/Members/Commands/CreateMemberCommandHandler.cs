@@ -8,17 +8,18 @@ namespace ClenaArch.Application.Members.Commands;
 public class CreateMemberCommandHandler : IRequestHandler<CreateMemberCommand, Member>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IValidator<CreateMemberCommand> _validator;
+    //Validação feita no pipeline
+    //private readonly IValidator<CreateMemberCommand> _validator;
 
     public CreateMemberCommandHandler(IUnitOfWork unitOfWork, IValidator<CreateMemberCommand> validator)
     {
         _unitOfWork = unitOfWork;
-        _validator = validator;
+        //_validator = validator;
     }
 
     public async Task<Member> Handle(CreateMemberCommand request, CancellationToken cancellationToken)
     {
-        _validator.ValidateAndThrow(request);
+        //_validator.ValidateAndThrow(request);
 
         var newMember =  new Member(request.FirstName, request.LastName, request.Gender, request.Email, request.IsActive);
 
