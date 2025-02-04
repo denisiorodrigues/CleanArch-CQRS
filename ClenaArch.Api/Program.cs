@@ -1,3 +1,4 @@
+using ClenaArch.Api.Filters;
 using ClenaArch.CrossCutting.Dependencies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,11 @@ builder.Services.AddSwaggerGen();
 
 //Configuração contexto
 builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddMvc(options =>
+{
+    options.Filters.Add<CustomExceptionFilter>();
+});
 
 var app = builder.Build();
 
